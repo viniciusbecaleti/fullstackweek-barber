@@ -3,6 +3,7 @@ import { ptBR } from 'date-fns/locale'
 
 import { Header } from "@/components/header"
 import { Search } from './components/search'
+import { BookingItem } from '@/components/booking-item'
 
 export default function Home() {
   const date = new Date()
@@ -34,6 +35,11 @@ export default function Home() {
 
       <div className='px-5 mt-6'>
         <Search />
+      </div>
+
+      <div className='px-5 mt-9'>
+        <h2 className='mb-3 uppercase text-xs text-gray-400 font-bold'>Agendamentos</h2>
+        <BookingItem />
       </div>
     </>
   )
