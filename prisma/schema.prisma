@@ -11,18 +11,20 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  email    String    @unique
+  id       String  @id @default(uuid())
+  email    String  @unique
   name     String?
   password String
+
   bookings Booking[]
 }
 
 model Barbershop {
-  id       String    @id @default(uuid())
+  id       String @id @default(uuid())
   name     String
   address  String
   imageUrl String
+
   services Service[]
   bookings Booking[]
 }
@@ -35,7 +37,8 @@ model Service {
 
   barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
   barbershopId String
-  bookings     Booking[]
+
+  bookings Booking[]
 }
 
 model Booking {

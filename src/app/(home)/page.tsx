@@ -2,11 +2,16 @@ import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
 import { Header } from "@/components/header"
-import { Search } from './components/search'
 import { BookingItem } from '@/components/booking-item'
+import { Search } from './components/search'
+import { BarbershopItem } from './components/barbershop-item'
 
-export default function Home() {
+import { db } from '../../../prisma/prisma'
+
+export default async function Home() {
   const date = new Date()
+
+  const barbershops = await db.barbershop.findMany({})
 
   return (
     <>
@@ -40,6 +45,14 @@ export default function Home() {
       <div className='px-5 mt-9'>
         <h2 className='mb-3 uppercase text-xs text-gray-400 font-bold'>Agendamentos</h2>
         <BookingItem />
+      </div>
+
+      <div className='px-5 mt-6'>
+        <h2 className='mb-3 uppercase text-xs text-gray-400 font-bold'>Agendamentos</h2>
+        
+        {barbershops.map((barbershop) => (
+          <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+        ))}
       </div>
     </>
   )
